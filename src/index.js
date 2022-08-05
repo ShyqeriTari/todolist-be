@@ -1,12 +1,25 @@
 import express from "express";
 import cors from "cors";
 import { testDB, syncDB } from "./db/index.js";
+import {
+    badRequestHandler,
+    unauthorizedHandler,
+    forbiddenHandler,
+    notFoundHandler,
+    genericErrorHandler,
+} from "./errorHandlers.js";
 
 const server = express()
 
 server.use(express.json())
 
 server.use(cors())
+
+server.use(badRequestHandler);
+server.use(unauthorizedHandler);
+server.use(forbiddenHandler);
+server.use(notFoundHandler);
+server.use(genericErrorHandler);
 
 const PORT = 3001
 
