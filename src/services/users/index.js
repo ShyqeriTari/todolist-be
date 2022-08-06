@@ -12,9 +12,14 @@ usersRouter.post('/register', async(req, res, next)=>{
       username: req.body.username,
       password : await bcrypt.hash(req.body.password, salt)
     };
+    const userExist = await User.findOne({where: {username: user.username}});
+    if(userExist){
+        res.status(400).send("Username already exist, please choose another one");
+    } else {
     const createdUser = await User.create(user);
-    const accessToken = await generateAccessToken({ _id: createdUser._id })
-    res.status(201).send({ user: await createdUser._id, accessToken })
+    const accessToken = await generateAccessToken({ _id: createdUser.id })
+    res.status(201).send({ user: createdUser.id, accessToken })
+    }
     } catch (error) {
         next(error)
     }
@@ -26,8 +31,8 @@ usersRouter.post('/login',async(req,res,next)=>{
     if(user){
        const passwordValid = await bcrypt.compare(req.body.password,user.password);
        if(passwordValid){
-        const accessToken = await generateAccessToken({ _id: user._id})
-           res.status(200).send({accessToken: accessToken, id: user._id} )
+        const accessToken = await generateAccessToken({ _id: user.id})
+           res.status(200).send({accessToken: accessToken, id: user.id} )
        } else {
          res.status(400).send({ error : "Incorrect password or username" });
        }

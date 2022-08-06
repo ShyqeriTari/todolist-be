@@ -11,7 +11,7 @@ export const JWTAuthMiddleware = async (req, res, next) => {
       const payload = await verifyAccessToken(token)
 
       req.user = {
-        _id: payload._id
+        _id: payload.id
       }
       next()
     } catch (error) {

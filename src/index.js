@@ -9,6 +9,7 @@ import {
     genericErrorHandler,
 } from "./errorHandlers.js";
 import usersRouter  from "./services/users/index.js";
+import todosRouter  from "./services/todos/index.js";
 
 const server = express()
 
@@ -17,6 +18,7 @@ server.use(express.json())
 server.use(cors())
 
 server.use("/user", usersRouter);
+server.use("/todo", todosRouter);
 
 const PORT = 3001
 
