@@ -1,7 +1,7 @@
 import sequelize from "../index.js";
 import { DataTypes } from "sequelize";
 
-const Todo = sequelize.define("article", {
+const Todo = sequelize.define("todo", {
     id: {
       primaryKey: true,
       type: DataTypes.UUID,
@@ -15,10 +15,6 @@ const Todo = sequelize.define("article", {
       type: DataTypes.TEXT,
       allowNull: false,
     },
-    lastUpdate: {
-        type: DataTypes.DATE,
-        allowNull: false,
-  }, 
 },
   {
     timestamps: true,

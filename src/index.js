@@ -8,6 +8,7 @@ import {
     notFoundHandler,
     genericErrorHandler,
 } from "./errorHandlers.js";
+import usersRouter  from "./services/users/index.js";
 
 const server = express()
 
@@ -15,13 +16,15 @@ server.use(express.json())
 
 server.use(cors())
 
+server.use("/user", usersRouter);
+
+const PORT = 3001
+
 server.use(badRequestHandler);
 server.use(unauthorizedHandler);
 server.use(forbiddenHandler);
 server.use(notFoundHandler);
 server.use(genericErrorHandler);
-
-const PORT = 3001
 
 const initialize = async () => {
     try {
