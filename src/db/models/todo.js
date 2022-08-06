@@ -1,28 +1,27 @@
 import sequelize from "../index.js";
 import { DataTypes } from "sequelize";
 
-const User = sequelize.define(
-  "user",
-  {
+const Todo = sequelize.define("article", {
     id: {
       primaryKey: true,
       type: DataTypes.UUID,
       defaultValue: DataTypes.UUIDV4,
     },
-    username: {
+    title: {
       type: DataTypes.STRING,
       allowNull: false,
     },
-    password: {
-        type: DataTypes.STRING,
-        allowNull: false,
+    content: {
+      type: DataTypes.TEXT,
+      allowNull: false,
     },
+    lastUpdate: {
+        type: DataTypes.DATE,
+        allowNull: false,
+  }, 
 },
   {
-    timestamps: false,
-  }
-);
-
-
-
-export default User;
+    timestamps: true,
+  });
+  
+  export default Todo;

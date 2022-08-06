@@ -1,8 +1,8 @@
 import { Sequelize } from "sequelize";
 
-const { HOST, USER, PORT, PASSWORD, DATABASE } = process.env;
+const { HOST, PORT, PASSWORD } = process.env;
 
-const sequelize = new Sequelize(DATABASE, USER, PASSWORD, {
+const sequelize = new Sequelize("todolist_challenge_silvio", "challenge_root", PASSWORD, {
     host: HOST,
     port: PORT,
     dialect: "mysql",
@@ -10,11 +10,11 @@ const sequelize = new Sequelize(DATABASE, USER, PASSWORD, {
 
 export const testDB = async () => {
     try {
-        await sequelize.authenticate();
+      await sequelize.authenticate();
     } catch (error) {
-        console.log(error);
+      console.log(error);
     }
-};
+  };
 
 export const syncDB = async () => {
     try {
