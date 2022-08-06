@@ -27,4 +27,28 @@ import {
     }
   })
 
+  todosRouter.put("/:id", JWTAuthMiddleware, async (req, res, next) => {
+    try {
+      const todoModify = await Todo.update(req.body, {
+        where: {
+          id: req.params.id,
+        },
+        returning: true,
+      });
+      res.status(204).send()
+    } catch (error) {
+      console.log(error);
+    }
+  });
+
+  todosRouter.delete("/:id", JWTAuthMiddleware, async (req, res, next) => {
+    try {
+      const todoRemove = await Todo.destroy({ where: { id: req.params.id } });
+
+      res.status(200).send();
+    } catch (error) {
+      console.log(error);
+    }
+  });
+
   export default todosRouter;
