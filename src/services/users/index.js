@@ -32,7 +32,7 @@ usersRouter.post('/login',async(req,res,next)=>{
        const passwordValid = await bcrypt.compare(req.body.password,user.password);
        if(passwordValid){
         const accessToken = await generateAccessToken({ _id: user.id})
-           res.status(200).send({accessToken: accessToken, id: user.id} )
+           res.status(200).send({accessToken: accessToken, user: user.id} )
        } else {
          res.status(400).send({ error : "Incorrect password or username" });
        }
