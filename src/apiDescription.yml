@@ -1,7 +1,8 @@
 openapi: 3.0.0
 info:
   description: |
-    This is a todoloist developed for Toduba challenge.  
+    This is a todoloist developed for Toduba challenge.
+    Please first you need to register or login then copy the acces token from the response and paste it on the right clicking on "Authorize". This is needed to access the protected endpoints (the protected endpoints have a lock on the top right corner, this is how you can recognize them). 
   version: "1.0.0"
   title: Todolist-challenge
   contact:
@@ -111,6 +112,54 @@ paths:
                 $ref: '#/components/schemas/Todo-DB-structure'
        '401':
         description: Please provide bearer token in authorization header.
+  /todo/{todoId}:
+    put:
+      tags:
+        - todo
+      summary: Modify todo
+      security:
+        - bearerAuth: []
+      description: This is the endpoint to modify a todo.
+      operationId: TodoModify
+      parameters:
+        - in: path
+          name: todoId
+          schema:
+            type: string
+          required: true
+          description: ID of the todo to modify
+      responses:
+       '204':
+        description: Todo successfully modified.
+       '401':
+        description: Please provide bearer token in authorization header.
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/TodoModify'
+        description: Todo modify object
+  /todo/{todoid}:
+    delete:
+      tags:
+        - todo
+      summary: Delete todo
+      security:
+        - bearerAuth: []
+      description: This is the endpoint to delete a todo.
+      operationId: TodoDelete
+      parameters:
+        - in: path
+          name: todoid
+          schema:
+            type: string
+          required: true
+          description: ID of the todo to delete
+      responses:
+       '200':
+        description: Todo successfully deleted.
+       '401':
+        description: Please provide bearer token in authorization header.
 components:
   securitySchemes:
     bearerAuth: 
@@ -160,7 +209,16 @@ components:
         userId:
           type: string  
       xml:
-        name: Todo    
+        name: Todo
+    TodoModify:
+      type: object
+      properties:
+        title:
+          type: string
+        content:
+          type: string
+      xml:
+        name: TodoModify
     Todo-DB-structure:
       type: object
       properties:
