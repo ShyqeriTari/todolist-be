@@ -10,15 +10,20 @@ import {
 } from "./errorHandlers.js";
 import usersRouter  from "./services/users/index.js";
 import todosRouter  from "./services/todos/index.js";
+import swaggerUI from "swagger-ui-express"
+import yamljs from "yamljs"
+import {join} from "path"
 
 const server = express()
 
 server.use(express.json())
+const yamlDocument = yamljs.load(join(process.cwd(), "./src/apiDescription.yml"))
 
 server.use(cors())
 
 server.use("/user", usersRouter);
 server.use("/todo", todosRouter);
+server.use("/docs", swaggerUI.serve, swaggerUI.setup(yamlDocument))
 
 const PORT = 3001
 
