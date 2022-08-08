@@ -1,75 +1,122 @@
----
 openapi: 3.0.0
 info:
+  description: |
+    This is a todoloist developed for Toduba challenge.  
+  version: "1.0.0"
   title: Todolist-challenge
-  description: "This is a todoloist developed for Toduba challenge.  \n"
   contact:
     email: silvio.tari@gmail.com
   license:
     name: Apache 2.0
-    url: http://www.apache.org/licenses/LICENSE-2.0.html
-  version: 1.0.0
-externalDocs:
-  description: Find out more about Swagger
-  url: http://swagger.io
+    url: 'http://www.apache.org/licenses/LICENSE-2.0.html'
 servers:
-- url: http://localhost:3001
-  description: Local server
+  - description: Local server
+    url: http://localhost:3001
 tags:
-- name: user
-  description: Registration and LogIn
-- name: todo
-  description: Create, get, modify and delete todos
+  - name: user
+    description: Registration and LogIn
+  - name: todo
+    description: Create, get, modify and delete todos
 paths:
   /user/register:
     post:
       tags:
-      - user
+        - user
       summary: Create user
       description: This is the endpoint to create a new user.
       operationId: createUser
+      responses:
+       '201':
+        description: Get the newly created user id and bearer token.
+        content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/LogResponse'
+       '400':
+        description: Username already exist, please choose another one.
       requestBody:
-        description: Created user object
         content:
           application/json:
             schema:
               $ref: '#/components/schemas/User'
-      responses:
-        "201":
-          description: Get the newly created user id and bearer token.
+        description: User creation object
   /user/login:
     post:
       tags:
-      - user
-      summary: Logs user into the system
-      operationId: loginUser
-      parameters:
-      - name: username
-        in: query
-        description: The user name for login
-        required: true
-        style: form
-        explode: true
-        schema:
-          type: string
-      - name: password
-        in: query
-        description: The password for login in clear text
-        required: true
-        style: form
-        explode: true
-        schema:
-          type: string
+        - user
+      summary: User login
+      description: This is the endpoint to login.
+      operationId: LogUser
       responses:
-        "200":
-          description: successful operation
-          content:
+       '201':
+        description: Get the user id and bearer token.
+        content:
             application/json:
               schema:
                 $ref: '#/components/schemas/LogResponse'
-        "400":
-          description: Invalid username or password
+       '400':
+        description: Incorrect password or username.
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/User'
+        description: User login object
+  /todo:
+    post:
+      tags:
+        - todo
+      summary: Todo creation
+      security:
+        - bearerAuth: []
+      description: This is the endpoint to create a todo.
+      operationId: TodoCreate
+      responses:
+       '201':
+        description: Get the newly created todo.
+        content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Todo-DB-structure'
+       '401':
+        description: Please provide bearer token in authorization header.
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Todo'
+        description: Todo create object
+  /todo/{userId}:
+    get:
+      tags:
+        - todo
+      summary: Get todos for a specific user
+      security:
+        - bearerAuth: []
+      description: This is the endpoint to get all todos for a specific user.
+      operationId: TodoGet
+      parameters:
+        - in: path
+          name: userId
+          schema:
+            type: string
+          required: true
+          description: ID of the todos owner
+      responses:
+       '201':
+        description: Get all the todos for a specific user.
+        content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Todo-DB-structure'
+       '401':
+        description: Please provide bearer token in authorization header.
 components:
+  securitySchemes:
+    bearerAuth: 
+      type: http
+      scheme: bearer
+      bearerFormat: JWT
   schemas:
     User:
       type: object
@@ -78,7 +125,19 @@ components:
           type: string
         password:
           type: string
-          format: Brypt hash
+      xml:
+        name: User    
+    User-DB-structure:
+      type: object
+      properties:
+        id:
+          type: string
+          format: UUID automatically generated
+        username:
+          type: string
+        password:
+          type: string
+          format: Bcrypt hash
       xml:
         name: User
     LogResponse:
@@ -91,3 +150,34 @@ components:
           format: JWT
       xml:
         name: LogResponse
+    Todo:
+      type: object
+      properties:
+        title:
+          type: string
+        content:
+          type: string
+        userId:
+          type: string  
+      xml:
+        name: Todo    
+    Todo-DB-structure:
+      type: object
+      properties:
+        id:
+          type: string
+          format: UUID automatically generated
+        title:
+          type: string
+        content:
+          type: string
+        createdAt:
+          type: string
+          format: date-time automatically generated
+        updatedAt:
+          type: string
+          format: date-time automatically generated
+        userId:
+          type: string 
+      xml:
+        name: Todo-DB-structure    
