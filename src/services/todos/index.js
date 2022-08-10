@@ -1,7 +1,6 @@
 import { Router } from "express";
 import {
     Todo,
-    User,
   } from "../../db/models/index.js";
   import { JWTAuthMiddleware } from "../../auth/JWTMiddleware.js"
 
