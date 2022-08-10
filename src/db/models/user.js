@@ -14,15 +14,13 @@ const User = sequelize.define(
       allowNull: false,
     },
     password: {
-        type: DataTypes.STRING,
-        allowNull: false,
+      type: DataTypes.STRING,
+      allowNull: false,
     },
-},
+  },
   {
     timestamps: false,
   }
 );
-
-
 
 export default User;

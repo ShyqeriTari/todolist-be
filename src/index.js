@@ -8,11 +8,11 @@ import {
     notFoundHandler,
     genericErrorHandler,
 } from "./errorHandlers.js";
-import usersRouter  from "./services/users/index.js";
-import todosRouter  from "./services/todos/index.js";
+import usersRouter from "./services/users/index.js";
+import todosRouter from "./services/todos/index.js";
 import swaggerUI from "swagger-ui-express"
 import yamljs from "yamljs"
-import {join} from "path"
+import { join } from "path"
 
 const server = express()
 
