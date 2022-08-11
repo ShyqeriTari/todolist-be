@@ -7,7 +7,7 @@ module.exports = {
     // "production" is the environment name
     production: {
       // SSH user
-      user: "ubuntu",
+      user: "silvio",
       // SSH key path, default to $HOME/.ssh
       key: "~/Documents/ssh-keys-silvio.pem",
       // SSH host
