@@ -3,6 +3,7 @@ module.exports = {
     name: 'todolist-be',
     script: './src/index.js',
     watch: true,
+    node_args : '-r dotenv/config',
     env_production: {
       PORT: "42069",
       HOST: "15.160.205.92",
