@@ -32,7 +32,7 @@ module.exports = {
 
         repo: "https://github.com/ShyqeriTari/todolist-be",
 
-        path: `/home/ubuntu/todolist-be-test`,
+        path: `/home/ubuntu/todolist-be-ch`,
 
         'pre-setup': "sudo apt-get install git; ls -la",
 
