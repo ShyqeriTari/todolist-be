@@ -3,18 +3,12 @@ module.exports = {
     name: 'todolist-be',
     script: './src/index.js',
     watch: true,
-    env_production: {
-      ENV_PORT: "42069",
-      ENV_HOST: "15.160.205.92",
-      ENV_PASSWORD: "89^eqCR*_p_Ua%g5",
-      ENV_JWT_SECRET: "todolist_challenge_silvio",
-    },
-    env_development: {
+    env: {
       PORT: "42069",
       HOST: "15.160.205.92",
       PASSWORD: "89^eqCR*_p_Ua%g5",
       JWT_SECRET: "todolist_challenge_silvio",
-    }
+    },
   }],
 
   deploy: {
