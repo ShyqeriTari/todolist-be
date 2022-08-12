@@ -3,7 +3,7 @@ module.exports = {
     name: 'todolist-be',
     script: './src/index.js',
     watch: true,
-    node_args : '-r dotenv/config',
+    node_args: '-r dotenv/config',
     env: {
       PORT: "42069",
       HOST: "15.160.205.92",
@@ -22,7 +22,13 @@ module.exports = {
       path: '/home/ubuntu/todolist-be-c',
       'pre-deploy-local': '',
       'post-deploy': 'npm install && npm run start && pm2 reload ecosystem.config.js --env production',
-      'pre-setup': ''
+      'pre-setup': '',
+      env: {
+        PORT: "42069",
+        HOST: "15.160.205.92",
+        PASSWORD: "89^eqCR*_p_Ua%g5",
+        JWT_SECRET: "todolist_challenge_silvio",
+      },
     }
   }
 };
