@@ -3,7 +3,7 @@ module.exports = {
     name: 'todolist-be',
     script: './src/index.js',
     watch: true,
-    env: {
+    env_production: {
       PORT: "42069",
       HOST: "15.160.205.92",
       PASSWORD: "89^eqCR*_p_Ua%g5",
