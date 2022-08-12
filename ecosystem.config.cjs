@@ -4,7 +4,7 @@ module.exports = {
     script: './src/index.js',
     watch: true,
     node_args : '-r dotenv/config',
-    env_production: {
+    env: {
       PORT: "42069",
       HOST: "15.160.205.92",
       PASSWORD: "89^eqCR*_p_Ua%g5",
