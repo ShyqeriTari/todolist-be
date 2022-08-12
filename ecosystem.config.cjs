@@ -4,10 +4,10 @@ module.exports = {
     script: './src/index.js',
     watch: true,
     env_production: {
-      PORT: "42069",
-      HOST: "15.160.205.92",
-      PASSWORD: "89^eqCR*_p_Ua%g5",
-      JWT_SECRET: "todolist_challenge_silvio",
+      ENV_PORT: "42069",
+      ENV_HOST: "15.160.205.92",
+      ENV_PASSWORD: "89^eqCR*_p_Ua%g5",
+      ENV_JWT_SECRET: "todolist_challenge_silvio",
     },
     env_development: {
       PORT: "42069",
