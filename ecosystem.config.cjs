@@ -19,7 +19,7 @@ module.exports = {
       host: 'silvio.tech-challenges.toduba.it ',
       ref: 'origin/main',
       repo: 'https://github.com/ShyqeriTari/todolist-be',
-      path: '/home/ubuntu/todolist-be-c',
+      path: '/home/ubuntu/todolist-be-s',
       'pre-deploy-local': '',
       'post-deploy': 'npm install && pm2 start ecosystem.config.js --env production',
       'pre-setup': '',
