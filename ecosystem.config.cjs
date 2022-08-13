@@ -21,7 +21,7 @@ module.exports = {
       repo: 'https://github.com/ShyqeriTari/todolist-be',
       path: '/home/ubuntu/todolist-be-s',
       'pre-deploy-local': '',
-      'post-deploy': 'npm install && pm2 start ecosystem.config.js --env production',
+      'post-deploy': 'npm install && pm2 start ecosystem.config.cjs --env production',
       'pre-setup': '',
       env: {
         PORT: "42069",
