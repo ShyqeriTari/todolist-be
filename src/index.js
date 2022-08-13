@@ -25,7 +25,7 @@ server.use("/user", usersRouter);
 server.use("/todo", todosRouter);
 server.use("/docs", swaggerUI.serve, swaggerUI.setup(yamlDocument))
 
-const PORT = 3002
+const PORT = 3003
 
 server.use(badRequestHandler);
 server.use(unauthorizedHandler);

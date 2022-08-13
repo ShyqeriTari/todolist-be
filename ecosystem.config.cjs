@@ -4,7 +4,7 @@ module.exports = {
     script: './src/index.js',
     watch: true,
     node_args: '-r dotenv/config',
-    env: {
+    env_production: {
       PORT: "42069",
       HOST: "15.160.205.92",
       PASSWORD: "89^eqCR*_p_Ua%g5",
@@ -19,7 +19,7 @@ module.exports = {
       host: 'silvio.tech-challenges.toduba.it ',
       ref: 'origin/main',
       repo: 'https://github.com/ShyqeriTari/todolist-be',
-      path: '/home/ubuntu/todolist-be-s',
+      path: '/home/ubuntu/todolist-be-si',
       'pre-deploy-local': '',
       'post-deploy': 'npm install && pm2 start ecosystem.config.cjs --env production',
       'pre-setup': '',
